@@ -6,6 +6,7 @@
   <groupId>io.github.GitHub-Xzhi</groupId>
   <artifactId>logback-profile</artifactId>
   <version>1.0.0</version>
+  <name>logback-profile</name>
   <description>logback配置文件</description>
 
   <url>https://github.com/GitHub-Xzhi/logback-profile</url>
@@ -128,13 +129,17 @@
       <distributionManagement>
         <snapshotRepository>
           <id>oss</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+          <!-- 新版URL -->
+          <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
           <id>oss</id>
-          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+          <!-- 新版URL -->
+          <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
       </distributionManagement>
     </profile>
   </profiles>
 </project>
+
+<!-- 最后使用 mvn clean deploy -P release 这个命令发布，然后输入gpg密码就行了 -->
