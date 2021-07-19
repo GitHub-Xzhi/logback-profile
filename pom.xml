@@ -3,10 +3,33 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.GitHub-Xzhi</groupId>
+  <groupId>io.github.GitHub-Xzhi</groupId>
   <artifactId>logback-profile</artifactId>
   <version>1.0.0</version>
   <description>logback配置文件</description>
+
+  <url>https://github.com/GitHub-Xzhi/logback-profile</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>actable</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Xzhi</name>
+      <email>cx_zhi@qq.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>git@github.com:GitHub-Xzhi/logback-profile.git</url>
+    <connection>scm:git:git@github.com:GitHub-Xzhi/logback-profile.git</connection>
+    <developerConnection>scm:git:git@github.com:GitHub-Xzhi/logback-profile.git</developerConnection>
+  </scm>
 
   <build>
     <resources>
@@ -32,4 +55,86 @@
       </resource>
     </resources>
   </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <!-- Source -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Javadoc -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <configuration>
+                  <additionalparam>-Xdoclint:none</additionalparam>
+                  <aggregate>true</aggregate>
+                  <charset>UTF-8</charset>
+                  <encoding>UTF-8</encoding>
+                  <docencoding>UTF-8</docencoding>
+                </configuration>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!--nexus-staging-maven-plugin-->
+          <!--          <plugin>-->
+          <!--            <groupId>org.sonatype.plugins</groupId>-->
+          <!--            <artifactId>nexus-staging-maven-plugin</artifactId>-->
+          <!--            <version>1.6.7</version>-->
+          <!--            <extensions>true</extensions>-->
+          <!--            <configuration>-->
+          <!--              <serverId>oss</serverId>-->
+          <!--              <nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+          <!--              <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+          <!--            </configuration>-->
+          <!--          </plugin>-->
+          <!-- GPG -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
+      <distributionManagement>
+        <snapshotRepository>
+          <id>oss</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+          <id>oss</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>
